@@ -7,7 +7,7 @@ class Sidebar extends Component {
         return(
             <div>
                 <ol>
-                    <Link to='./FolderDetail'>
+                <Link to='./FolderDetail'>
                 <li>Folder #1</li>
                 </Link>
                 <Link to='./FolderDetail'>

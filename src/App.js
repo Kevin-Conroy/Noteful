@@ -30,6 +30,10 @@ export default class App extends Component {
         
           <Route path="/folderdetail" component={FolderDetail} />
 
+          <Route path="/addfolder" component={AddFolder} />
+
+          <Route path="/addnote" component={AddNote} />
+
           <Route path="/notedetail" component={NoteDetail} />
         
       </div>
