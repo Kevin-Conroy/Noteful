@@ -6,7 +6,7 @@ class NoteDetail extends Component {
     render() {
         return (
             <div>
-                 <h3>Here are some note details.</h3>
+                 <h3>Here are some notes.</h3>
                  <div>
                  <Link to='./AddNote'>
                      Click here to add a note

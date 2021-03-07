@@ -7,7 +7,7 @@ class FolderDetail extends Component {
         return (
             <div>
                
-            <h3>Here is some information about this folder</h3>
+            <h3>Here is some basic information about this folder</h3>
                 <Link to='./NoteDetail'>
               <h4>Click here for this folder's content</h4>
                 </Link>
