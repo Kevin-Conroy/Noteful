@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Link } from "react-router-dom";
+import data from "./Folders"
 
-class Sidebar extends Component {
-    render() {
+const { folders, notes } = data;
+
+export default function Sidebar() {
         return(
             <div>
-                <ol>
-                <Link to='./FolderDetail'>
-                <li>Folder #1</li>
-                </Link>
-                <Link to='./FolderDetail'>
-                <li>Folder #2</li>
-                </Link>
-                <Link to='./FolderDetail'>
-                <li>Folder #3</li>
-                </Link>
-                </ol>
+                <h3>Folders</h3>
+                <ul className='folders'>
+                    {folders.map(folder =>
+                        <li key={folder.id}>
+                        <Link to={`/folder/${folder.id}`}>
+                                 {folder.name}
+                        </Link>
+                        </li>)}
+                </ul>
+               
             </div>
         )
     }
-}
 
-export default Sidebar
+
+
+
+/*
+
+export default function PoemListPage() {
+  return (
+    <>
+      <p>Choose a poem from the list below.</p>
+      <ul className='PoemList'>
+        {POEMS.map(poem =>
+          <li key={poem.id}>
+            <Link to={`/poem/${poem.id}`}>
+              {poem.title}
+              </Link>
+          </li>
+        )}
+      </ul>
+    </>
+  )
+}
+*/

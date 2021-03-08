@@ -8,6 +8,7 @@ import FolderDetail from "./FolderDetail";
 import NoteDetail from "./NoteDetail";
 import AddFolder from "./AddFolder";
 import AddNote from "./AddNote"
+import folders from "./Folders"
 
 export default class App extends Component {
   render() {
@@ -26,9 +27,9 @@ export default class App extends Component {
             Click to add a folder
           </Link>
         </addFolder>
-
+          <Route path="/folder/:folderId" component={FolderDetail} />
         
-          <Route path="/folderdetail" component={FolderDetail} />
+          
 
           <Route path="/addfolder" component={AddFolder} />
 
