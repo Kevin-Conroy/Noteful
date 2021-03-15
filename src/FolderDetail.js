@@ -18,7 +18,7 @@ export default function FolderDetail(props) {
 
   return (
     <div>
-      <h3>Folder Detail</h3>
+      <h4>Folder Detail</h4>
       <h3>{selectedFolder.name}</h3>
       {selectedNotes.map((note) => (
         <Link to={"/NoteContent/" + note.id}>
