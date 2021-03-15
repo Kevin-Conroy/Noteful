@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import FolderDetail from './FolderDetail'
-import data from './Folders'
+import FolderDetail from "./FolderDetail";
+import data from "./Folders";
 
-export default function NoteDetail(props) {
-  console.log(props)
+export default function NoteSummary(props) {
+  console.log(props);
+
   return (
+
     <div>
       <ul>
-        name: {props.name}<br></br>
+        name: {props.name}
+        <br></br>
         modified: {props.modified}
-        
       </ul>
     </div>
-  )
+  );
 }
-
-
-
-
-
-
 /*
+<Link to={`/folder/${folder.id}`}>
+                                 {folder.name}
+                        </Link>
+
+
 function NoteDetail(props) {
   const thisNote = data.notes.find(note => note.id === props.selectedFolder.id)
   const thisFolder = data.folders.find(folder => folder.id === thisNote.folderId)

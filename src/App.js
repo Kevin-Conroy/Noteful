@@ -5,19 +5,19 @@ import "./App.css";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import FolderDetail from "./FolderDetail";
-import NoteDetail from "./NoteDetail";
+import NoteSummary from "./NoteSummary";
 import AddFolder from "./AddFolder";
 import AddNote from "./AddNote";
 import initialState from "./Folders";
+import NoteContent from "./NoteContent";
 
 export default class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = initialState;
   }
-  
-  render() {
 
+  render() {
     return (
       <div>
         <header>
@@ -28,38 +28,25 @@ export default class App extends Component {
           <Sidebar />
         </sidebar>
 
-  
-
         <addFolder>
-          <Link to="./AddFolder">Click to add a folder</Link>
+          <Link to="/AddFolder">Click to add a folder</Link>
         </addFolder>
-        
+
         <Route path="/folder/:folderId" component={FolderDetail} />
 
         <Route path="/addfolder" component={AddFolder} />
 
         <Route path="/addnote" component={AddNote} />
-        
-        <Route path="/notedetail:noteId"
-        
-        //this is where the NoteContent component will live 
-        
-        />
-       
-        
-        
 
+        <Route
+          path="/notecontent/:noteId"
+          render={(routerProps) => {
+            const note = this.state.notes.find((n) => n.id === routerProps.match.params.noteId);
+            const folder = this.state.folders.find((f) => f.id === note.folderId);
+            return <NoteContent note={note} folder={folder} />;
+          }}
+        />
       </div>
     );
   }
 }
-/*
-<Route
-  path='/foo'
-  render={(routerProps) =>
-    <FooSidebar
-      aFoo={this.state.foos.find(foo => foo.id === routeProps.match.params.foodId)}
-    />
-  }
-/>
-*/
