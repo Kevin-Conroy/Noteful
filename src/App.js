@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Route,  Link } from "react-router-dom";
 import "./App.css";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import FolderDetail from "./FolderDetail";
-import NoteSummary from "./NoteSummary";
 import AddFolder from "./AddFolder";
 import AddNote from "./AddNote";
 import initialState from "./Folders";
@@ -41,8 +39,12 @@ export default class App extends Component {
         <Route
           path="/notecontent/:noteId"
           render={(routerProps) => {
-            const note = this.state.notes.find((n) => n.id === routerProps.match.params.noteId);
-            const folder = this.state.folders.find((f) => f.id === note.folderId);
+            const note = this.state.notes.find(
+              (n) => n.id === routerProps.match.params.noteId
+            );
+            const folder = this.state.folders.find(
+              (f) => f.id === note.folderId
+            );
             return <NoteContent note={note} folder={folder} />;
           }}
         />
