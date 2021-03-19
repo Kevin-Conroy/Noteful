@@ -1,15 +1,18 @@
 import React, { Component } from "react";
+import NotefulContext from "./Context";
 
 export default function NoteSummary(props) {
   console.log(props);
 
   return (
-    <div>
-      <ul>
-        name: {props.name}
-        <br></br>
-        modified: {props.modified}
-      </ul>
-    </div>
+    <NotefulContext.Consumer>
+      {({ handleDelete }) => (
+        <div>
+          <div>name: {props.name}</div>
+          <div>modified: {props.modified}</div>
+          <button onClick={(event) => handleDelete(event, props.id)}>Delete</button>
+        </div>
+      )}
+    </NotefulContext.Consumer>
   );
 }
