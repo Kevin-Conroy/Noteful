@@ -13,11 +13,6 @@ class AddNote extends Component {
     };
   }
 
-  
- 
-
-
-
   handleSubmit(event) {
     event.preventDefault();
 
@@ -40,34 +35,46 @@ class AddNote extends Component {
     return (
       <div>
         <NotefulContext.Consumer>
-          {({ addNote, folders, handleAddNote }) => (
-            <form onSubmit={(e) => addNote(e, this.state.noteName)}>
-              <h2>Add a Note</h2>
-              <input
-                value={this.state.noteName}
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Your note name here"
-                onChange={this.handleName.bind(this)}
-              />
-              <br></br>
-              <input
-                value={this.state.noteContent}
-                type="text"
-                placeholder="Note content here"
-                onChange={this.handleContent.bind(this)}
-              />
-              <div className="drop-down">
-                <select onChange={this.handleFolder.bind(this)}>
-                  {folders.map((folder) => {
-                    return <option value={folder.id}>{folder.name}</option>;
-                  })}
-                </select>
-              </div>
-              <button type="submit" onClick={event => handleAddNote(event, this.state)}>Add note</button>
-            </form>
-          )}
+          {({ addNote, folders, handleAddNote }) => {
+            
+            if (!this.state.folderId) {
+              this.setState({ folderId: folders[0].id });
+            }
+
+            return (
+              <form onSubmit={(e) => addNote(e, this.state.noteName)}>
+                <h2>Add a Note</h2>
+                <input
+                  value={this.state.noteName}
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Your note name here"
+                  onChange={this.handleName.bind(this)}
+                />
+                <br></br>
+                <input
+                  value={this.state.noteContent}
+                  type="text"
+                  placeholder="Note content here"
+                  onChange={this.handleContent.bind(this)}
+                />
+                <div className="drop-down">
+                  <select onChange={this.handleFolder.bind(this)}>
+                    {folders.map((folder) => {
+                      return <option value={folder.id}>{folder.name}</option>;
+                    })}
+                  </select>
+                </div>
+                <button
+                  type="submit"
+                  onClick={(event) => handleAddNote(event, this.state)}
+                >
+                  Add note
+                </button>
+              </form>
+            );
+          }}
         </NotefulContext.Consumer>
       </div>
     );
