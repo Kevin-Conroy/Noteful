@@ -28,7 +28,7 @@ export default class App extends Component {
         this.setState({ folders, notes });
       })
       .catch(console.log)
-      .then(() => setTimeout(() => this.setState({ loading: false }), 3000));
+      .then(() => setTimeout(() => this.setState({ loading: false }), 1000));
   }
 
   addFolder(event, name) {
@@ -49,6 +49,27 @@ export default class App extends Component {
         console.log(responseJson);
       });
   }
+
+  handleAddNote(event, newNote) {
+    event.preventDefault();
+
+
+    fetch(`http://localhost:9090/notes`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify( newNote ),
+      })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          const newNoteState = [...this.state.notes];
+          newNoteState.push(responseJson);
+          console.log(newNoteState)
+          this.setState({ notes: newNoteState });
+          console.log(responseJson);
+        });
+    }
 
   handleDelete(event, id) {
     event.preventDefault();
@@ -73,9 +94,11 @@ export default class App extends Component {
         value={{
           addFolder: this.addFolder.bind(this),
           handleDelete: this.handleDelete.bind(this),
+          handleAddNote: this.handleAddNote.bind(this),
           folders: this.state.folders,
           notes: this.state.notes,
           loading: this.state.loading,
+
         }}
       >
         <div>

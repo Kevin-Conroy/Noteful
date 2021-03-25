@@ -7,12 +7,12 @@ export default function FolderDetail(props) {
   return (
     <NotefulContext.Consumer>
       {(data) => {
-        if(data.loading){
-          return(
+        if (data.loading) {
+          return (
             <div>
               <h3>Loading...</h3>
             </div>
-          )
+          );
         }
         console.log(data);
         const selectedFolder = data.folders.find(
@@ -30,9 +30,17 @@ export default function FolderDetail(props) {
             <h3>{selectedFolder.name}</h3>
             {selectedNotes.map((note) => (
               <Link to={"/NoteContent/" + note.id}>
-                <NoteSummary name={note.name} modified={note.modified} id={note.id}/>
+                <NoteSummary
+                  name={note.name}
+                  modified={note.modified}
+                  id={note.id}
+                />
               </Link>
             ))}
+
+            <Link to="/AddNote">
+              <button type="button">Click to add a note</button>
+            </Link>
           </div>
         );
       }}
