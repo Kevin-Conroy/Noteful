@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import data from "./Folders";
 
-const { folders, notes } = data;
 
-export default function Sidebar() {
+export default function Sidebar({folders}) {
   return (
     <div>
       <h3>Folders</h3>

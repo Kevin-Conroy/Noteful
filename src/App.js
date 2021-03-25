@@ -28,14 +28,31 @@ export default class App extends Component {
         this.setState({ folders, notes });
       })
       .catch(console.log)
-      .then(() => 
-      setTimeout(() => this.setState({ loading: false }), 3000)
-    )
+      .then(() => setTimeout(() => this.setState({ loading: false }), 3000));
+  }
+
+  addFolder(event, name) {
+    event.preventDefault();
+
+    fetch(`http://localhost:9090/folders`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ name }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        const newState = [...this.state.folders];
+        newState.push(responseJson);
+        this.setState({ folders: newState });
+        console.log(responseJson);
+      });
   }
 
   handleDelete(event, id) {
-    event.preventDefault()
-    event.stopPropagation()
+    event.preventDefault();
+    event.stopPropagation();
     fetch(`http://localhost:9090/note/${id}`, {
       method: "DELETE",
       headers: {
@@ -51,23 +68,22 @@ export default class App extends Component {
   }
 
   render() {
-
     return (
       <NotefulContext.Provider
-        value={{ handleDelete: this.handleDelete.bind(this), folders: this.state.folders, notes: this.state.notes, loading: this.state.loading}}
+        value={{
+          addFolder: this.addFolder.bind(this),
+          handleDelete: this.handleDelete.bind(this),
+          folders: this.state.folders,
+          notes: this.state.notes,
+          loading: this.state.loading,
+        }}
       >
         <div>
-          <header>
-            <Header />
-          </header>
+          <Header />
 
-          <sidebar>
-            <Sidebar />
-          </sidebar>
+          <Sidebar folders={this.state.folders} />
 
-          <addFolder>
-            <Link to="/AddFolder">Click to add a folder</Link>
-          </addFolder>
+          <Link to="/AddFolder">Click to add a folder</Link>
 
           <Route path="/folder/:folderId" component={FolderDetail} />
 
