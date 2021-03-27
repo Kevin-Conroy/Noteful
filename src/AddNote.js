@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import NotefulContext from "./Context";
+import NotefulError from "./ErrorBoundary"
 
 class AddNote extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class AddNote extends Component {
   render() {
     return (
       <div>
+        
         <NotefulContext.Consumer>
           {({ addNote, folders, handleAddNote }) => {
             
@@ -76,6 +78,7 @@ class AddNote extends Component {
             );
           }}
         </NotefulContext.Consumer>
+     
       </div>
     );
   }

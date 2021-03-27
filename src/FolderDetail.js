@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import NoteSummary from "./NoteSummary";
 import NotefulContext from "./Context";
+import NotefulError from "./ErrorBoundary";
+import PropTypes from "prop-types";
 
 export default function FolderDetail(props) {
   return (
@@ -47,3 +49,8 @@ export default function FolderDetail(props) {
     </NotefulContext.Consumer>
   );
 }
+
+FolderDetail.propTypes = {
+  selectedNotes: PropTypes.array,
+  selectedFolder: PropTypes.array,
+};

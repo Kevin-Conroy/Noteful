@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import NotefulContext from "./Context";
+import NotefulError from "./ErrorBoundary"
+import PropTypes from 'prop-types';
 
 export default function NoteSummary(props) {
   console.log(props);
 
   return (
+    
     <NotefulContext.Consumer>
       {({ handleDelete }) => (
         <div>
@@ -14,5 +17,7 @@ export default function NoteSummary(props) {
         </div>
       )}
     </NotefulContext.Consumer>
+ 
   );
 }
+

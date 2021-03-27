@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Context from "./Context";
+import NotefulError from "./ErrorBoundary";
 
 class AddFolder extends Component {
   constructor(props) {

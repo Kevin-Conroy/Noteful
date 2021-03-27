@@ -9,6 +9,7 @@ import AddNote from "./AddNote";
 import initialState from "./Folders";
 import NoteContent from "./NoteContent";
 import NotefulContext from "./Context";
+import NotefulError from "./ErrorBoundary";
 
 export default class App extends Component {
   constructor(props) {
@@ -23,18 +24,15 @@ export default class App extends Component {
       ),
 
       fetch("http://localhost:9090/notes").then((response) => response.json()),
-    ])
-      .then(([folders, notes]) => {
-        this.setState({ folders, notes });
-      })
-      .catch(console.log)
-      .then(() => setTimeout(() => this.setState({ loading: false }), 1000));
+    ]).then(([folders, notes]) => {
+      this.setState({ folders, notes, loading: false });
+    });
   }
 
   addFolder(event, name) {
     event.preventDefault();
 
-    fetch(`http://localhost:9090/folders`, {
+    return fetch(`http://localhost:9090/folders`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -53,28 +51,30 @@ export default class App extends Component {
   handleAddNote(event, newNote) {
     event.preventDefault();
 
-
-    fetch(`http://localhost:9090/notes`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify( newNote ),
+    return fetch(`http://localhost:9090/notes`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newNote),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        const newNoteState = [...this.state.notes];
+        newNoteState.push(responseJson);
+        console.log(newNoteState);
+        this.setState({ notes: newNoteState });
+        console.log(responseJson);
       })
-        .then((response) => response.json())
-        .then((responseJson) => {
-          const newNoteState = [...this.state.notes];
-          newNoteState.push(responseJson);
-          console.log(newNoteState)
-          this.setState({ notes: newNoteState });
-          console.log(responseJson);
-        });
-    }
+      .catch((error) => {
+        console.log("Loading error");
+      });
+  }
 
   handleDelete(event, id) {
     event.preventDefault();
     event.stopPropagation();
-    fetch(`http://localhost:9090/note/${id}`, {
+    return fetch(`http://localhost:9090/note/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -98,13 +98,13 @@ export default class App extends Component {
           folders: this.state.folders,
           notes: this.state.notes,
           loading: this.state.loading,
-
         }}
       >
         <div>
           <Header />
-
-          <Sidebar folders={this.state.folders} />
+          <NotefulError>
+            <Sidebar folders={this.state.folders} />
+          </NotefulError>
 
           <Link to="/AddFolder">Click to add a folder</Link>
 

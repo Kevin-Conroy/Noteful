@@ -1,9 +1,12 @@
 import React from "react";
 import NotefulContext from "./Context";
+import NotefulError from "./ErrorBoundary"
+import PropTypes from 'prop-types';
 
 export default function NoteContent(props) {
   return (
     <NotefulContext.Consumer>
+      
       {(data) => {
         if(data.loading){
           return(
@@ -27,6 +30,11 @@ export default function NoteContent(props) {
           </div>
         );
       }}
+      
     </NotefulContext.Consumer>
   );
 }
+
+NoteContent.propTypes = {
+  note: PropTypes.object.isRequired
+};

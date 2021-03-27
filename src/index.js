@@ -4,11 +4,14 @@ import {  BrowserRouter, Route, Switch, Link  } from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import NotefulError from './ErrorBoundary'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <NotefulError >
     <App />
+    </NotefulError>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
