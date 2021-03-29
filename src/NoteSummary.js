@@ -3,6 +3,9 @@ import NotefulContext from "./Context";
 import NotefulError from "./ErrorBoundary"
 import PropTypes from 'prop-types';
 
+
+
+
 export default function NoteSummary(props) {
   console.log(props);
 
@@ -20,4 +23,13 @@ export default function NoteSummary(props) {
  
   );
 }
+
+NoteSummary.propTypes = {
+  name: PropTypes.string.isRequired,
+  modified: PropTypes.string,
+  id: PropTypes.string.isRequired
+
+};
+
+
 

@@ -1,7 +1,7 @@
 import React from "react";
 import NotefulContext from "./Context";
 import NotefulError from "./ErrorBoundary"
-import PropTypes from 'prop-types';
+
 
 export default function NoteContent(props) {
   return (
@@ -35,6 +35,4 @@ export default function NoteContent(props) {
   );
 }
 
-NoteContent.propTypes = {
-  note: PropTypes.object.isRequired
-};
+

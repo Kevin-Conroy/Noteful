@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import NotefulContext from "./Context";
-import NotefulError from "./ErrorBoundary"
+import NotefulError from "./ErrorBoundary";
 
 class AddNote extends Component {
   constructor(props) {
@@ -35,27 +35,25 @@ class AddNote extends Component {
   render() {
     return (
       <div>
-        
         <NotefulContext.Consumer>
           {({ addNote, folders, handleAddNote }) => {
-            
             if (!this.state.folderId) {
               this.setState({ folderId: folders[0].id });
             }
 
             return (
-              <form onSubmit={(e) => addNote(e, this.state.noteName)}>
+              <form onSubmit={(e) => handleAddNote(e, this.state)}>
                 <h2>Add a Note</h2>
-                <input
+                <input required
                   value={this.state.noteName}
-                  type="text"
+                  type="text" 
                   name="name"
                   id="name"
                   placeholder="Your note name here"
                   onChange={this.handleName.bind(this)}
                 />
                 <br></br>
-                <input
+                <input required
                   value={this.state.noteContent}
                   type="text"
                   placeholder="Note content here"
@@ -68,17 +66,11 @@ class AddNote extends Component {
                     })}
                   </select>
                 </div>
-                <button
-                  type="submit"
-                  onClick={(event) => handleAddNote(event, this.state)}
-                >
-                  Add note
-                </button>
+                <button type="submit">Add note</button>
               </form>
             );
           }}
         </NotefulContext.Consumer>
-     
       </div>
     );
   }

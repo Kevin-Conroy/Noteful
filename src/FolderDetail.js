@@ -19,7 +19,9 @@ export default function FolderDetail(props) {
         console.log(data);
         const selectedFolder = data.folders.find(
           (f) => f.id === props.match.params.folderId
+          
         );
+        console.log(props.match.params.folderId)
 
         const selectedNotes = data.notes.filter(
           (n) => n.folderId === selectedFolder.id
@@ -51,6 +53,6 @@ export default function FolderDetail(props) {
 }
 
 FolderDetail.propTypes = {
-  selectedNotes: PropTypes.array,
-  selectedFolder: PropTypes.array,
-};
+  match: PropTypes.object.isRequired
+  
+}

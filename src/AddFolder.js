@@ -27,7 +27,7 @@ class AddFolder extends Component {
           {({ addFolder }) => (
             <form onSubmit={(e) => addFolder(e, this.state.folderName)}>
               <h2>Add a folder</h2>
-              <input
+              <input required
                 value={this.state.folderName}
                 type="text"
                 name="name"
